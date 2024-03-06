@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.first_name }}!</h1>
+    
+    <h2>Recipes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Recipe Name</th>
+                <th>Under 30 Minutes</th>
+                <th>Posted By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in all_recipes %}
+                <tr>
+                    <td>{{ recipe.name }}</td>
+                    {% if recipe.under_thirty == 1 %}
+                        <td>Yes</td>
+                    {% else %}
+                        <td>No</td>
+                    {% endif %}
+                    <td>{{ recipe.creator.first_name }}</td>
+                    <td>
+                        <a href="/recipes/{{ recipe.id }}">View</a>
+                        <a href="/recipes/{{ recipe.id }}/edit">Edit</a>
+                        <!-- <a href="/recipes/{{ recipe.id }}/delete">Delete</a> -->
+                        <form class="btn-link" action="/recipes/{{ recipe.id }}/delete" method="post" style="display: inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('recipes_new') }}">Create Recipe</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

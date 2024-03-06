@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details</title>
+</head>
+<body>
+    <h1>Welcome, {{ recipe.creator.first_name }}!</h1>
+
+    <div class="recipe-card">
+        <h2>{{ recipe.name }}</h2>
+        <p><strong>Posted by:</strong> {{ recipe.creator.first_name }} {{recipe.creator.last_name}}</p>
+        <p><strong>Description:</strong> {{ recipe.description }}</p>
+        <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+        <p><strong>Date Cooked:</strong> {{ recipe.date_cooked }}</p>
+        <p><strong>Under Thirty Minutes:</strong> {% if recipe.under_thirty %}Yes{% else %}No{% endif %}</p>
+
+        <a href="/dashboard"><button>Back to Recipes</button></a>
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+</body>
+</html>
